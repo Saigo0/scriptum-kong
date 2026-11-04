@@ -1,0 +1,41 @@
+_format_version: "3.0"
+services:
+  - name: scriptum-auth
+    url: http://auth:8082
+    routes:
+      - name: auth-route
+        paths:
+          - /auth
+        strip_path: false
+
+
+  - name: scriptum-ocr
+    url: http://ocr:8080
+    routes:
+      - name: ocr-route
+        paths:
+          - /ocr
+        strip_path: false
+    plugins:
+      - name: jwt 
+
+  - name: scriptum-note-manager
+    url: http://note-manager:8081
+    routes:
+      - name: documentos-route
+        paths:
+          - /documentos
+        strip_path: false
+      - name: grupos-route
+        paths:
+          - /grupos
+        strip_path: false
+    plugins:
+      - name: jwt 
+
+consumers:
+  - username: scriptum-client
+    jwt_secrets:
+      - key: scriptum-issuer
+        secret: scriptum-chave-secreta-super-segura-32-bytes
+        algorithm: HS256

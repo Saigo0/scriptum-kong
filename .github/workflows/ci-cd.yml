@@ -45,6 +45,7 @@ jobs:
           sed -i "s|{{URL_OCR}}|$URL_OCR|g" kong.yml
           sed -i "s|{{URL_AUTH}}|$URL_AUTH|g" kong.yml
           sed -i "s|{{URL_NOTE}}|$URL_NOTE|g" kong.yml
+          cat kong.yml
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5

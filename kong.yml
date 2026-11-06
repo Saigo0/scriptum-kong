@@ -11,13 +11,13 @@ services:
   - name: scriptum-note-manager
     url: {{URL_NOTE}}
     routes:
-      - name: documentos-route
+      - name: documents-route
         paths:
-          - /documentos
+          - /documents
         strip_path: false
-      - name: grupos-route
+      - name: categories-route
         paths:
-          - /grupos
+          - /categories
         strip_path: false
     plugins:
       - name: jwt

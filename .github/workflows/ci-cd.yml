@@ -34,7 +34,17 @@ jobs:
       
             
       - name: Injetar ambiente no kong.yml (Homol)
-        run: sed -i 's/{{AMBIENTE}}/homol/g' kong.yml      
+        run: sed -i 's/{{AMBIENTE}}/homol/g' kong.yml 
+        
+      - name: Injetar variáveis no kong.yml (Homol)
+        env:
+          URL_OCR: ${{ secrets.OCR_URL_HOMOL }}
+          URL_AUTH: ${{ secrets.AUTH_URL_HOMOL }}
+          URL_NOTE: ${{ secrets.NOTE_URL_HOMOL }}
+        run: |
+          sed -i "s|{{URL_OCR}}|$URL_OCR|g" kong.yml
+          sed -i "s|{{URL_AUTH}}|$URL_AUTH|g" kong.yml
+          sed -i "s|{{URL_NOTE}}|$URL_NOTE|g" kong.yml
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5
@@ -85,6 +95,16 @@ jobs:
 
       - name: Injetar ambiente no kong.yml (Prod)
         run: sed -i 's/{{AMBIENTE}}/prod/g' kong.yml
+
+      - name: Injetar variáveis no kong.yml (Prod)
+        env:
+          URL_OCR: ${{ secrets.OCR_URL_PROD }}
+          URL_AUTH: ${{ secrets.AUTH_URL_PROD }}
+          URL_NOTE: ${{ secrets.NOTE_URL_PROD }}
+        run: |
+          sed -i "s|{{URL_OCR}}|$URL_OCR|g" kong.yml
+          sed -i "s|{{URL_AUTH}}|$URL_AUTH|g" kong.yml
+          sed -i "s|{{URL_NOTE}}|$URL_NOTE|g" kong.yml
 
         #comentario pra teste
 

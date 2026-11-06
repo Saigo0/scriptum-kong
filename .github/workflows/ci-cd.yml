@@ -32,7 +32,10 @@ jobs:
           tags: |
             type=raw,value=v${{ env.DOCKER_TAG_VERSION }}-homol
       
-            
+        
+        #teste
+
+        
       - name: Injetar ambiente no kong.yml (Homol)
         run: sed -i 's/{{AMBIENTE}}/homol/g' kong.yml 
         

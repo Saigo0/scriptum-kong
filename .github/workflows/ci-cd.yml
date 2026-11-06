@@ -31,7 +31,10 @@ jobs:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/scriptum-kong
           tags: |
             type=raw,value=v${{ env.DOCKER_TAG_VERSION }}-homol
+      
             
+      - name: Injetar ambiente no kong.yml (Homol)
+        run: sed -i 's/{{AMBIENTE}}/homol/g' kong.yml      
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5
@@ -79,6 +82,9 @@ jobs:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/scriptum-kong
           tags: |
             type=raw,value=v${{ env.DOCKER_TAG_VERSION }}-prod
+
+      - name: Injetar ambiente no kong.yml (Prod)
+        run: sed -i 's/{{AMBIENTE}}/prod/g' kong.yml
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5

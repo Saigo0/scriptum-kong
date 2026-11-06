@@ -1,37 +1,33 @@
 _format_version: "3.0"
 services:
   - name: scriptum-auth
-    url: http://auth:8082
+    url: http://scriptum-auth-{{AMBIENTE}}:10000
     routes:
       - name: auth-route
         paths:
           - /auth
         strip_path: false
 
+  - name: scriptum-note-manager
+    url: http://scriptum-note-manager-{{AMBIENTE}}:10000
+    routes:
+      - name: documentos-route
+        paths:
+          - /documentos
+        strip_path: false
+    plugins:
+      - name: jwt 
 
+  
   - name: scriptum-ocr
-    url: http://ocr:8080
+    url: https://scriptum-ocr-{{AMBIENTE}}.onrender.com
     routes:
       - name: ocr-route
         paths:
           - /ocr
         strip_path: false
     plugins:
-      - name: jwt 
-
-  - name: scriptum-note-manager
-    url: http://note-manager:8081
-    routes:
-      - name: documentos-route
-        paths:
-          - /documentos
-        strip_path: false
-      - name: grupos-route
-        paths:
-          - /grupos
-        strip_path: false
-    plugins:
-      - name: jwt 
+      - name: jwt
 
 consumers:
   - username: scriptum-client

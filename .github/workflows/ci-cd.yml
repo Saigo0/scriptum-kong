@@ -108,6 +108,7 @@ jobs:
 
         #comentario pra teste
         #outro comentario pra teste
+        #teste
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5

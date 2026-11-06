@@ -107,6 +107,7 @@ jobs:
           sed -i "s|{{URL_NOTE}}|$URL_NOTE|g" kong.yml
 
         #comentario pra teste
+        #outro comentario pra teste
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5
